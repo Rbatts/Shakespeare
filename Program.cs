@@ -12,24 +12,35 @@ namespace ConsoleApp4
         {
             string path = @"C:\Users\Rich\Downloads\SampleText.txt";
             string textFromFile = System.IO.File.ReadAllText(path);
-            //Console.WriteLine(textFromFile);
+            textFromFile = textFromFile.ToLower();
 
-            int counter;
-            counter = 0;
+            Console.WriteLine("\n What Three Letter Sequence Would You Like To Search For?  ");
+            string userResponse = Console.ReadLine();
+
+            Dictionary<string, int> dict = new Dictionary<string, int>();
 
             for (var i = 0; i < 174126; i = i + 1)
             {
-                if (textFromFile[i] == 't' && textFromFile[i+1] == 'r' && textFromFile[i+2] == 'a')
+                if (textFromFile[i] == 't' && textFromFile[i + 1] == 'r' && textFromFile[i + 2] == 'a')
                 {
-                    counter ++;
-                    
+                    updateDictionary(dict, "tra");
                 }
-                
             }
-            Console.WriteLine(counter);
-
+            Console.WriteLine($"\n {dict["tra"]}");
             Console.ReadLine();
 
+        }
+        public static void updateDictionary(Dictionary<string, int> dict, string keyCode)
+        {
+            if (dict.ContainsKey(keyCode))
+            {
+                int value = dict[keyCode];
+                dict[keyCode] = ++value;
+            }
+            else
+            {
+                dict.Add(keyCode, 1);
+            }
         }
     }
 }
